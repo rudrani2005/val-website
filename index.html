@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>For You ❤️</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="scene" onclick="nextDialogue()">
+    <div class="speech-bubble" id="bubble">
+      Hi! Himu 🐼<br>
+      Click anywhere to continue 💕
+    </div>
+
+    <img src="bubu.jpeg" alt="Bubu the Panda" class="panda">
+  </div>
+
+  <!-- 🌹 Start Game Button (hidden initially) -->
+  <button
+    id="startGameBtn"
+    class="start-btn"
+    onclick="location.href='rose-game.html'"
+    style="display:none;"
+  >
+    🌹 Start Rose Day Game
+  </button>
+
+  <!-- ✅ JS AT THE BOTTOM -->
+  <script>
+    const dialogues = [
+      "Hi! Himu 🐼<br>Click anywhere to continue 💕",
+      "I have valentine week hunt for you 👀💖",
+      "Complete every challenge to get your reward 🥹",
+      "Lessgoooo 😳🔥",
+      "Happy Valentine’s 💍💖"
+    ];
+
+    let index = 0;
+    const bubble = document.getElementById("bubble");
+    const startBtn = document.getElementById("startGameBtn");
+
+    function nextDialogue() {
+      index++;
+
+      if (index < dialogues.length) {
+        bubble.innerHTML = dialogues[index];
+      }
+
+      // 🌟 SHOW BUTTON AFTER LAST MESSAGE
+      if (dialogues[index] === "Happy Valentine’s 💍💖") {
+        startBtn.style.display = "inline-block";
+      }
+    }
+  </script>
+
+</body>
+</html>

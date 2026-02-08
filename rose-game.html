@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Catch the Roses 🌹</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="rose-catch-game">
+    <h2>🌹 Catch the Roses 🌹</h2>
+    <p>Catch 5 roses to unlock your reward 💖</p>
+
+    <p id="score">Roses caught: 0 / 5</p>
+
+    <div id="gameArea"></div>
+
+    <p id="rewardText"></p>
+
+    <!-- Optional next button -->
+    <button id="nextBtn" style="display:none;" onclick="goNext()">
+      Next 💕
+    </button>
+  </div>
+
+  <script>
+  let score = 0;
+  const gameArea = document.getElementById("gameArea");
+  const scoreText = document.getElementById("score");
+  const rewardText = document.getElementById("rewardText");
+  const nextBtn = document.getElementById("nextBtn");
+
+  const flowers = ["🌹", "🌼", "🌷", "🌺", "💐"];
+
+  function createFlower() {
+    if (score >= 5) return;
+
+    const flower = document.createElement("div");
+    flower.classList.add("rose");
+
+    // Random flower
+    const randomFlower =
+      flowers[Math.floor(Math.random() * flowers.length)];
+    flower.innerText = randomFlower;
+
+    flower.style.left =
+      Math.random() * (gameArea.offsetWidth - 40) + "px";
+
+    flower.onclick = () => {
+      if (randomFlower === "🌹") {
+        score++;
+        scoreText.innerText = `Roses caught: ${score} / 5`;
+
+        if (score === 5) {
+          rewardText.innerHTML =
+            "🎉 You caught only roses 🌹💖<br>Reward unlocked!";
+          nextBtn.style.display = "inline-block";
+        }
+      } else {
+        rewardText.innerHTML =
+          "❌ Oops! Only roses count 🌹😅";
+      }
+
+      flower.remove();
+    };
+
+    gameArea.appendChild(flower);
+
+    setTimeout(() => {
+      flower.remove();
+    }, 4000);
+  }
+
+  setInterval(createFlower, 900);
+  function goNext() {
+  window.location.href = "bouquet.html";
+    }
+
+</script>
+
+
+</body>
+</html>

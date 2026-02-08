@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Find the Ring 💍</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="ring-page">
+
+  <h2>💖 Find the Ring 💍</h2>
+  <p id="hint">Click the box that hides the ring 🌹</p>
+
+  <div class="ring-game" id="game">
+    <!-- Boxes will appear here -->
+  </div>
+
+  <p id="result"></p>
+
+  <script>
+    const game = document.getElementById("game");
+    const result = document.getElementById("result");
+
+    const totalBoxes = 9;
+    const ringIndex = Math.floor(Math.random() * totalBoxes);
+
+    for (let i = 0; i < totalBoxes; i++) {
+      const box = document.createElement("div");
+      box.className = "ring-box";
+      box.innerText = "🎁";
+
+      box.onclick = () => {
+        if (i === ringIndex) {
+          box.innerText = "💍";
+          result.innerHTML = `
+            🎉 You found it! 🎉<br><br>
+            I knew you’d find my ring…<br>
+            Will you be mine forever? 💖💍
+          `;
+          const continueBtn = document.createElement("button");
+        continueBtn.innerText = "Continue ➡️";
+        continueBtn.className = "continue-button";
+        continueBtn.onclick = () => {
+          window.location.href = "chocolate.html"; // redirect to Chocolate Day
+        };
+        result.appendChild(document.createElement("br")); // spacing
+        result.appendChild(continueBtn);
+        } else {
+          box.innerText = "❌";
+          box.style.pointerEvents = "none"; // prevent multiple clicks
+        }
+      };
+
+      game.appendChild(box);
+    }
+  </script>
+
+</body>
+</html>

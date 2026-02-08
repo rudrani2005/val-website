@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chocolate Day 🍫</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="choco-page">
+
+  <h2>🍫 Chocolate Day Surprise 💖</h2>
+  <p id="instruction">Filling your chocolate box… 😳🍫</p>
+
+  <!-- Falling area -->
+  <div class="fall-area" id="fallArea"></div>
+
+  <!-- Container -->
+  <div class="choco-container" id="chocoBox"></div>
+
+  <p id="scoreText"></p>
+
+  <button id="nextBtn" style="display:none;" onclick="goNext()">
+    Claim Reward 💝
+  </button>
+
+<script>
+  const fallArea = document.getElementById("fallArea");
+  const box = document.getElementById("chocoBox");
+  const instruction = document.getElementById("instruction");
+  const scoreText = document.getElementById("scoreText");
+  const nextBtn = document.getElementById("nextBtn");
+
+  const chocoTypes = ["🍫", "🍬", "🍪", "🍩", "🍡"];
+  const TOTAL_HEARTS = 5;
+
+  let chocolates = [];
+  let heartsFound = 0;
+
+  // 🍫 Drop chocolates freely
+  function dropChocolate() {
+  const choco = document.createElement("div");
+  choco.className = "falling-choco";
+  choco.innerText =
+    chocoTypes[Math.floor(Math.random() * chocoTypes.length)];
+
+  // random horizontal position while falling
+  choco.style.left = Math.random() * 280 + "px";
+
+  fallArea.appendChild(choco);
+
+  // ⬇️ THIS IS WHERE box.appendChild() GOES
+  choco.addEventListener("animationend", () => {
+    fallArea.removeChild(choco);
+
+    // turn it into a settled chocolate
+    choco.className = "choco";
+
+    // 🔀 RANDOM POSITION INSIDE BOX (for overlap)
+    choco.style.left = Math.random() * (box.clientWidth - 30) + "px";
+    choco.style.top = Math.random() * (box.clientHeight - 30) + "px";
+    choco.style.zIndex = Math.floor(Math.random() * 50);
+    
+    const scale = Math.random() * 0.4 + 0.8;
+    choco.style.transform = `scale(${scale})`;
+
+    // ✅ ADD TO CONTAINER HERE
+    box.appendChild(choco);
+
+    chocolates.push(choco);
+
+    if (chocolates.length >= 140) {
+      startGame();
+    }
+  });
+}
+
+
+  const fallInterval = setInterval(dropChocolate, 120);
+
+  // ❤️ Start game
+  function startGame() {
+    clearInterval(fallInterval);
+    instruction.innerText = "Find the heart chocolates 💖🍫";
+
+    // Hide falling area
+    fallArea.style.display = "none";
+
+    // Convert random chocolates to hearts
+    for (let i = 0; i < TOTAL_HEARTS; i++) {
+      const randomIndex = Math.floor(Math.random() * chocolates.length);
+      chocolates[randomIndex].innerText = "❤️";
+      chocolates[randomIndex].classList.add("heart");
+    }
+
+    chocolates.forEach(choco => {
+      choco.onclick = () => {
+        if (choco.classList.contains("heart")) {
+          choco.innerText = "✨";
+          choco.onclick = null;
+          heartsFound++;
+
+          scoreText.innerText =
+            `Hearts found: ${heartsFound} / ${TOTAL_HEARTS}`;
+
+          if (heartsFound === TOTAL_HEARTS) {
+            instruction.innerHTML = "🍫💖 You found them all!";
+            nextBtn.style.display = "inline-block";
+          }
+        }
+      };
+    });
+  }
+
+  function goNext() {
+    window.location.href = "chocolate-reward.html";
+  }
+</script>
+
+</body>
+</html>
