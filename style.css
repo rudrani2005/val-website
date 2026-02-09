@@ -1,367 +1,107 @@
-
- 
-  body {
+/* --- Global Fixes --- */
+body {
   margin: 0;
-  height: 100vh;
+  min-height: 100vh; /* Changed from height to min-height */
   background-image: url("bg.avif");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  overflow-x: hidden; /* Prevents side-scrolling on mobile */
+  font-family: 'Poppins', sans-serif;
 }
 
-
-
+/* --- Scene & Panda (The Mobile Fix) --- */
 .scene {
   position: relative;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 }
 
-/* Panda image */
 .panda {
-  width: 300px;
-  margin-top: 400px;
-  margin-left: -270px;
+  width: 70%; /* Percentage width so it fits any screen */
+  max-width: 250px;
+  margin-top: 20px; /* Removed the 400px margin that would hide it on mobile */
+  margin-left: 0; 
 }
 
-/* Speech bubble */
+/* Speech bubble adjusted for top of screen */
 .speech-bubble {
-  position: absolute;
-  top: 320px;
-  left: 30%;
-  transform: translateX(-50%);
+  position: relative; /* Changed from absolute for better stacking */
+  margin: 20px auto;
   background: white;
   padding: 15px 20px;
   border-radius: 20px;
+  width: 80%;
   max-width: 260px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.2);
   font-size: 16px;
+  z-index: 10;
 }
 
-/* Little triangle (tail of bubble) */
-.speech-bubble::after {
-  content: "";
-  position: absolute;
-  bottom: -15px;
-  left: 50%;
-  transform: translateX(-50%);
-  border-width: 15px 15px 0;
-  border-style: solid;
-  border-color: white transparent transparent;
-}
-
-/* 🌹 Catch the Roses Game */
-.rose-catch-game {
-  margin-top: 60px;
-  text-align: center;
-}
-
+/* --- Games & Containers --- */
 #gameArea {
   position: relative;
-  width: 100%;
-  max-width: 500px;
-  height: 300px;
+  width: 90%; /* Responsive width */
+  max-width: 400px;
+  height: 350px;
   margin: 20px auto;
   overflow: hidden;
   border-radius: 20px;
   background: rgba(255, 255, 255, 0.4);
 }
 
-.rose {
-  position: absolute;
-  top: -40px;
-  font-size: 40px;
-  cursor: pointer;
-  animation: fall 2s linear forwards;
-}
-
-@keyframes fall {
-  from {
-    top: -40px;
-  }
-  to {
-    top: 320px;
-  }
-}
-
-#rewardText {
-  margin-top: 20px;
-  font-size: 22px;
-  color: #b30047;
-}
-
-#nextBtn {
-  margin-top: 20px;
-  padding: 10px 20px;
-  font-size: 18px;
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-  background: #ff6f91;
-  color: white;
-}
-.start-btn {
-  margin-top: 20px;
-  padding: 12px 25px;
-  font-size: 18px;
-  border-radius: 25px;
-  border: none;
-  cursor: pointer;
-  background-color: #ff5c8a;
-  color: white;
-}
-/* 💐 Bouquet Page */
-.bouquet-page {
-  background: linear-gradient(to bottom, #ffdde1, #ee9ca7);
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: 'Poppins', sans-serif;
-}
-
-.bouquet-container {
-  text-align: center;
-  background: rgba(255, 255, 255, 0.6);
-  padding: 40px;
-  border-radius: 25px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-}
-
-.bouquet {
-  font-size: 80px;
-  margin: 20px 0;
-  animation: pop 1.5s infinite;
-}
-
-@keyframes pop {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.1); }
-  100% { transform: scale(1); }
-}
-
-.bouquet-text {
-  font-size: 20px;
-  color: #b30047;
-  line-height: 1.5;
-}
-
-.next-btn {
-  margin-top: 25px;
-  padding: 12px 30px;
-  font-size: 18px;
-  border: none;
-  border-radius: 30px;
-  cursor: pointer;
-  background: #ff5c8a;
-  color: white;
-}
-/* 💐 Bouquet Image */
-.bouquet-img {
-  width: 250px;
-  max-width: 80%;
-  margin: 20px auto;
-  display: block;
-  animation: float 2.5s ease-in-out infinite;
-}
-
-@keyframes float {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-  100% { transform: translateY(0); }
-}
-
-
-/* 🍫 Chocolate Page */
-.choco-page {
-  background: linear-gradient(#2b0f0f, #120606);
-  color: white;
-  text-align: center;
-  font-family: 'Poppins', sans-serif;
-}
-
-/* Falling zone */
-.fall-area {
-  position: relative;
-  height: 200px;
-  width: 320px;
-  margin: auto;
-  overflow: hidden;
-}
-
-/* Falling chocolate */
-.falling-choco {
-  position: absolute;
-  top: -40px;
-  font-size: 28px;
-  animation: fall 0.6s linear forwards;
-}
-
-@keyframes fall {
-  to {
-    top: 200px;
-  }
-}
-
+/* Chocolate container fix */
 .choco-container {
   position: relative;
-  width: 320px;
-  height: 420px;
+  width: 90%;
+  max-width: 320px;
+  height: 400px;
   margin: 10px auto;
   background: #3b1a1a;
   border-radius: 20px;
-  overflow: hidden;
 }
 
-
-/* Settled chocolate */
-.choco {
-  position: absolute;
-  font-size: 28px;
-  cursor: pointer;
-  user-select: none;
-}
-
-
-/* ❤️ Heart */
-.heart {
-  animation: pulse 1s infinite alternate;
-}
-
-@keyframes pulse {
-  from { transform: scale(1); }
-  to { transform: scale(1.4); }
-}
-
-/* Button */
-#nextBtn {
-  margin-top: 15px;
-  padding: 10px 22px;
-  border-radius: 20px;
-  border: none;
-  background: pink;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-/* 🍫 Reward Page */
-.reward-page {
-  background: linear-gradient(#3b1a1a, #120606);
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: 'Poppins', sans-serif;
-  color: #3b1a1a;
-}
-
-.coupon {
-  background: #fff5f5;
-  padding: 25px;
-  border-radius: 20px;
-  width: 90%;
-  max-width: 380px;
-  text-align: center;
-  box-shadow: 0 0 25px rgba(255, 0, 0, 0.3);
-}
-
-.coupon-box {
-  border: 2px dashed #ff4d6d;
-  border-radius: 15px;
-  padding: 20px;
-  margin: 20px 0;
-  background: #ffe3e3;
-}
-
-.coupon-text {
-  font-size: 18px;
-  line-height: 1.5;
-}
-
-.small-text {
-  font-size: 13px;
-  color: #555;
-  margin-top: 10px;
-}
-
-.love-note {
-  font-size: 16px;
-  margin-top: 15px;
-  color: #6a040f;
-}
-
-.next-btn {
-  margin-top: 15px;
-  padding: 10px 22px;
-  border: none;
-  border-radius: 20px;
-  background: hotpink;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.next-btn:hover {
-  background: #ff4d6d;
-}
-
-
-/* 💍 Find the Ring Game */
-.ring-page {
-  background: linear-gradient(#fff0f3, #ffd6e0);
-  min-height: 100vh;
-  text-align: center;
-  font-family: 'Poppins', sans-serif;
-  padding: 20px;
-}
-
+/* --- Grid Fix for Ring Game --- */
 .ring-game {
   display: grid;
-  grid-template-columns: repeat(3, 100px);
-  grid-gap: 15px;
-  justify-content: center;
-  margin-top: 30px;
+  grid-template-columns: repeat(3, 1fr); /* Uses 3 equal columns */
+  grid-gap: 10px;
+  max-width: 320px;
+  margin: 30px auto;
 }
 
 .ring-box {
-  width: 100px;
-  height: 100px;
+  width: 100%; /* Boxes will resize based on screen width */
+  aspect-ratio: 1 / 1; /* Keeps them square */
   background: #ffe3e3;
   border: 2px dashed #ff4d6d;
   border-radius: 15px;
-  font-size: 36px;
+  font-size: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  transition: transform 0.2s;
 }
 
-.ring-box:hover {
-  transform: scale(1.1);
+/* --- Bouquet Page --- */
+.bouquet-img {
+  width: 60%;
+  max-width: 250px;
+  height: auto;
 }
 
-#result {
-  margin-top: 25px;
-  font-size: 18px;
-  font-weight: bold;
-  color: #6a040f;
+/* --- Media Query for tiny phones --- */
+@media (max-width: 350px) {
+  .speech-bubble {
+    font-size: 14px;
+  }
+  .ring-box {
+    font-size: 24px;
+  }
 }
-.continue-button {
-  background: linear-gradient(135deg, #ff6b81, #ff9ab3);
-  color: white;
-  border: none;
-  padding: 12px 25px;
-  margin-top: 15px;
-  font-size: 18px;
-  font-weight: bold;
-  border-radius: 30px;
-  cursor: pointer;
-  box-shadow: 0 5px 15px rgba(255, 105, 135, 0.4);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
+ 
 
-.continue-button:hover {
-  transform: scale(1.1);
-  box-shadow: 0 8px 20px rgba(255, 105, 135, 0.6);
-}
-
+  
