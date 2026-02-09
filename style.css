@@ -25,7 +25,7 @@ body {
   width: 60%;         /* Adjusts size based on phone width */
   max-width: 280px;   /* Prevents it from getting too huge on tablets */
   margin: 0; 
-  margin-top: 500px;/* Removes the old problematic margins */
+  margin-top: 5000px;/* Removes the old problematic margins */
   display: block;
 }
 
